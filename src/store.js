@@ -9,4 +9,7 @@ export const store = reactive({
     movies: [],
 
     userInput: '',
+
+    loader: true,
+
 })

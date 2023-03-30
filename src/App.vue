@@ -1,6 +1,7 @@
 <script>
 
 import AppSearch from './components/AppSearch.vue';
+import AppMain from './components/AppMain.vue';
 
 import {store} from './store.js'
 
@@ -27,7 +28,10 @@ export default {
           this.store.movies = res.data.results;
 
           this.store.userInput = '';
+          this.store.loader = false;
   
+        }).catch(() => {
+          this.store.loader = true;
         })
       }
 
@@ -45,6 +49,7 @@ export default {
 
   components: {
     AppSearch,
+    AppMain,
   },
 
 
@@ -53,7 +58,6 @@ export default {
   },
 
   created() {
-    // this.baseSearch();
   },
 
 
@@ -63,10 +67,11 @@ export default {
 </script>
 
 <template>
+
   <AppSearch @user-search="userSearch()"></AppSearch>
-  <div v-for="movie, index in this.store.movies">
-    {{ this.store.movies[index].title }}
-  </div>
+
+  <AppMain></AppMain>
+
 </template>
 
 <style scoped>
