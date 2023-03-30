@@ -17,19 +17,21 @@ export default {
 
   methods: {
     userSearch() {
-      let newBaseSearch = this.store.APIcall;
+      let newBaseSearch = this.store.APImoviesCall;
 
       if(this.store.userInput != '') {
 
-        newBaseSearch += `&query=${this.store.userInput}`;
+        newBaseSearch += `&query=${this.store.userInput}&`;
 
-        axios.get(newBaseSearch).then((res) => {  
-  
+        axios.get(newBaseSearch).then((res) => {
+
           this.store.movies = res.data.results;
+
+          console.log(this.store.movies);
 
           this.store.userInput = '';
           this.store.loader = false;
-  
+
         }).catch(() => {
           this.store.loader = true;
         })
@@ -37,11 +39,12 @@ export default {
 
 
 
+
     },
 
 
   },
-  
+
   emits: [
     'user-search',
 

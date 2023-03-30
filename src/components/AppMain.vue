@@ -1,5 +1,7 @@
 <script>
 
+import MovieItemVue from "./MovieItem.vue";
+
 import { store } from "../store.js";
 
 
@@ -14,17 +16,31 @@ export default {
         }
     },
 
+    components: {
+        MovieItemVue,
+    }
+
 }
 
 
 </script>
 
 <template>
-    <div v-for="(movie, index) in this.store.movies" v-if="this.store.loader == false">
-        {{ this.store.movies[index].title }}
+    <div id="movie-container">
+        <MovieItemVue></MovieItemVue>
+
     </div>
 </template>
 
 <style lang="scss" scoped>
+
+#movie-container {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 10px;
+    width: 1400px;
+    margin: auto;
+    padding: 40px;
+}
 
 </style>
