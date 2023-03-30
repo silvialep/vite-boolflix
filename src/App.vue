@@ -1,5 +1,7 @@
 <script>
 
+import AppSearch from './components/AppSearch.vue';
+
 import {store} from './store.js'
 
 import axios from "axios";
@@ -13,15 +15,36 @@ export default {
   },
 
   methods: {
-    
+    userSearch() {
+      let newBaseSearch = this.store.APIcall;
+
+      if(this.store.userInput != '') {
+
+        newBaseSearch += `&query=${this.store.userInput}`;
+
+        axios.get(newBaseSearch).then((res) => {  
+  
+          this.store.movies = res.data.results;
+
+          this.store.userInput = '';
+  
+        })
+      }
+
+
+
+    },
+
+
   },
   
   emits: [
+    'user-search',
 
   ],
 
   components: {
-
+    AppSearch,
   },
 
 
@@ -30,17 +53,8 @@ export default {
   },
 
   created() {
-    axios.get(this.store.APIcall).then((res) => {
-
-      let newSearch = this.store.APIcall += '&query=';
-
-      console.log(newSearch);
-
-      // this.store.movies = res.data.data;
-
-
-    })
-  }
+    // this.baseSearch();
+  },
 
 
 
@@ -49,8 +63,9 @@ export default {
 </script>
 
 <template>
-  <div>
-
+  <AppSearch @user-search="userSearch()"></AppSearch>
+  <div v-for="movie, index in this.store.movies">
+    {{ this.store.movies[index].title }}
   </div>
 </template>
 
