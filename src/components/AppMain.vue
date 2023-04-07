@@ -1,6 +1,7 @@
 <script>
 
-import MovieItemVue from "./MovieItem.vue";
+import MovieItem from "./MovieItem.vue";
+import SeriesItem from "./SeriesItem.vue";
 
 import { store } from "../store.js";
 
@@ -17,7 +18,8 @@ export default {
     },
 
     components: {
-        MovieItemVue,
+        MovieItem,
+        SeriesItem,
     }
 
 }
@@ -26,21 +28,52 @@ export default {
 </script>
 
 <template>
-    <div id="movie-container">
-        <MovieItemVue></MovieItemVue>
+    <div id="big-container">
+        
+        <h2>Movies</h2>
+        <div id="movie-container">
+            <MovieItem :movie="movie" v-for="movie in this.store.movies" v-if="this.store.loader == false"></MovieItem>
+            
+        </div>
+        
+        
+        <h2>Series</h2>
+        <div id="series-container">
+            <SeriesItem :serie="serie" v-for="serie in this.store.series" v-if="this.store.loader == false"></SeriesItem>
+        </div>
 
     </div>
 </template>
 
 <style lang="scss" scoped>
 
-#movie-container {
-    display: flex;
-    flex-flow: row wrap;
-    gap: 10px;
+#big-container {
     width: 1400px;
     margin: auto;
     padding: 40px;
+
+    h2 {
+        padding: 10px 0;
+    }
+
+    
+    
 }
 
+#movie-container {
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 10px;
+    height: auto;
+    margin-bottom: 40px;
+    overflow-x: scroll;
+
+}
+
+#series-container {
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 10px;
+    overflow-x: scroll;
+}
 </style>

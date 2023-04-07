@@ -24,7 +24,7 @@ export default {
 
 <template>
     <div id="search-bar">
-        <input v-model="this.store.userInput" @keyup.enter="$emit('user-search')" type="text" placeholder="Inserisci il film da cercare">
+        <input v-model="this.store.userInput" @keyup.enter="$emit('user-search')" type="text" placeholder="Inserisci il film o la serie da cercare">
         <button @click="$emit('user-search')">Cerca</button>
     </div>
 </template>
@@ -34,8 +34,16 @@ export default {
 #search-bar {
     display: flex;
     gap: 20px;
-
     padding: 20px;
+
+    input {
+        width: 300px;
+        padding: 5px;
+    }
+
+    button {
+        padding: 0 5px;
+    }
 }
 
 </style>

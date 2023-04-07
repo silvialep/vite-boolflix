@@ -7,6 +7,8 @@ import {store} from './store.js'
 
 import axios from "axios";
 
+
+
 export default {
   data() {
     return {
@@ -16,14 +18,14 @@ export default {
   },
 
   methods: {
-    userSearch() {
-      let newBaseSearch = this.store.APImoviesCall;
+    userMoviesSearch() {
+      let newMovieSearch = this.store.APImoviesCall;
 
       if(this.store.userInput != '') {
 
-        newBaseSearch += `&query=${this.store.userInput}&`;
+        newMovieSearch += `&query=${encodeURIComponent(this.store.userInput)}&`;
 
-        axios.get(newBaseSearch).then((res) => {
+        axios.get(newMovieSearch).then((res) => {
 
           this.store.movies = res.data.results;
 
@@ -36,13 +38,36 @@ export default {
           this.store.loader = true;
         })
       }
-
-
-
-
     },
 
+    userSeriesSearch() {
+      let newSerieSearch = this.store.APISeriesCall;
 
+      if (this.store.userInput != '') {
+
+        newSerieSearch += `&query=${encodeURIComponent(this.store.userInput)}&`;
+
+        axios.get(newSerieSearch).then((res) => {
+
+          this.store.series = res.data.results;
+
+          console.log(this.store.series);
+
+          this.store.userInput = '';
+          this.store.loader = false;
+
+        }).catch(() => {
+          this.store.loader = true;
+        })
+      }
+    },
+
+    // trendingMovies() {
+    //   axios.get(this.store.APItrendingBase).then((res) => {
+    //     this.store.movies = res.data.results;
+    //   });
+
+    // },
   },
 
   emits: [
@@ -61,6 +86,7 @@ export default {
   },
 
   created() {
+    // this.trendingMovies();
   },
 
 
@@ -71,7 +97,7 @@ export default {
 
 <template>
 
-  <AppSearch @user-search="userSearch()"></AppSearch>
+  <AppSearch @user-search="userMoviesSearch(), userSeriesSearch()"></AppSearch>
 
   <AppMain></AppMain>
 
