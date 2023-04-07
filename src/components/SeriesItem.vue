@@ -16,7 +16,13 @@ export default {
 
     props: {
         serie: Object,
-    }
+    },
+
+    computed: {
+        // correctFlag() {
+        //     return serie.original_language;
+        // },
+    },
 
 }
 
@@ -24,14 +30,14 @@ export default {
 </script>
 
 <template>
-    <div class="serie-card">
-            <img :src="`https://image.tmdb.org/t/p/w300/${serie.poster_path}`" alt="">
-            <div class="serie-title">Titolo: <strong>{{ serie.name }}</strong></div>
-            <div class="serie-orig-title">Titolo originale: {{ serie.original_name }}</div>
-            <div class="serie-orig-lang">Lingua originale: {{ serie.original_language }} <img :src="`https://www.unknown.nu/flags/images/${serie.original_language}-100`" alt=""></div>
-            <div class="serie-vote-avg">Voto medio: {{ serie.vote_average }}</div>
+    <div class="serie-card" v-if="this.store.loader == false">
+        <img :src="`https://image.tmdb.org/t/p/w342/${serie.poster_path}`" alt="">
+        <div class="serie-title">Titolo: <strong>{{ serie.name }}</strong></div>
+        <div class="serie-orig-title">Titolo originale: {{ serie.original_name }}</div>
+        <div class="serie-orig-lang">Lingua originale: {{ serie.original_language }} </div>
+        <div class="serie-vote-avg">Voto medio: <i v-for="star in Math.ceil(serie.vote_average / 2)" class="fa-solid fa-star"></i><i v-for="star in 5 - Math.ceil(serie.vote_average / 2)" class="fa-regular fa-star"></i></div>
 
-        </div>
+    </div>
 </template>
 
 <style lang="scss" scoped>
@@ -39,7 +45,7 @@ export default {
     display: flex;
     flex-flow: column nowrap;
     gap: 5px;
-    width: 300px;
+    min-width: 300px;
     height: 600px;
     border: 1px solid red;
     padding: 8px;

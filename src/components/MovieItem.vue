@@ -18,6 +18,7 @@ export default {
 
     props: {
         movie: Object,
+        trendMovie: Object,
     },
 
     methods: {
@@ -47,14 +48,23 @@ export default {
 
 <template>
     
-    <div class="movie-card">
-        <img :src="`https://image.tmdb.org/t/p/w300/${movie.poster_path}`" alt="">
+    <div class="movie-card" v-if="this.store.loader == false">
+        <img :src="`https://image.tmdb.org/t/p/w342/${movie.poster_path}`" alt="">
         <div class="movie-title">Titolo: <strong>{{ movie.title }}</strong></div>
         <div class="movie-orig-title">Titolo originale: {{ movie.original_title }}</div>
         <div class="movie-orig-lang">Lingua originale: {{ movie.original_language }} <img :src="`https://www.unknown.nu/flags/images/${movie.original_language}-100`" alt=""></div>
-        <div class="movie-vote-avg">Voto medio: {{ movie.vote_average }}</div>
+        <div class="movie-vote-avg">Voto medio: <i v-for="star in Math.ceil(movie.vote_average / 2)" class="fa-solid fa-star"></i><i v-for="star in 5 - Math.ceil(movie.vote_average / 2)" class="fa-regular fa-star"></i></div>
 
     </div>
+
+    <!-- <div class="trend-movie" v-else>
+        <img :src="`https://image.tmdb.org/t/p/w342/${trendMovie.poster_path}`" alt="">
+        <div class="movie-title">Titolo: <strong>{{ trendMovie.title }}</strong></div>
+        <div class="movie-orig-title">Titolo originale: {{ trendMovie.original_title }}</div>
+        <div class="movie-orig-lang">Lingua originale: {{ trendMovie.original_language }} <img :src="`https://www.unknown.nu/flags/images/${trendMovie.original_language}-100`" alt=""></div>
+        <div class="movie-vote-avg">Voto medio: <i v-for="star in Math.ceil(trendMovie.vote_average / 2)" class="fa-solid fa-star"></i><i v-for="star in 5 - Math.ceil(movie.vote_average / 2)" class="fa-regular fa-star"></i></div>
+
+    </div> -->
 
 
 </template>
