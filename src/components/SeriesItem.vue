@@ -10,6 +10,7 @@ export default {
     data() {
         return {
             store,
+            languageFlag: this.serie.original_language,
 
         }
     },
@@ -19,9 +20,22 @@ export default {
     },
 
     computed: {
-        // correctFlag() {
-        //     return serie.original_language;
-        // },
+        correctFlag() {
+            switch (this.languageFlag) {
+                case "en":
+                    return "gb";
+                case "ja":
+                    return "jp";
+                case "zh":
+                    return "cn";
+                case "ko":
+                    return "kr";
+                case "da":
+                    return "dk";
+                default:
+                    return this.languageFlag;
+            }
+        },
     },
 
 }
@@ -34,7 +48,7 @@ export default {
         <img :src="`https://image.tmdb.org/t/p/w342/${serie.poster_path}`" alt="">
         <div class="serie-title">Titolo: <strong>{{ serie.name }}</strong></div>
         <div class="serie-orig-title">Titolo originale: {{ serie.original_name }}</div>
-        <div class="serie-orig-lang">Lingua originale: {{ serie.original_language }} </div>
+        <div class="serie-orig-lang">Lingua originale: <span :class="`fi fi-${correctFlag}`"></span></div>
         <div class="serie-vote-avg">Voto medio: <i v-for="star in Math.ceil(serie.vote_average / 2)" class="fa-solid fa-star"></i><i v-for="star in 5 - Math.ceil(serie.vote_average / 2)" class="fa-regular fa-star"></i></div>
 
     </div>
