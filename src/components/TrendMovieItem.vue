@@ -7,18 +7,17 @@ import { store } from "../store.js";
 
 export default {
 
-    name: 'MovieItem',
+    name: 'TrendMovieItem',
 
     data() {
         return {
             store,
-            languageFlag: this.movie.original_language,
-            movieImage: 'https://image.tmdb.org/t/p/w342' + this.movie.poster_path,
+            languageFlag: this.trendMovie.original_language,
+            movieImage: 'https://image.tmdb.org/t/p/w342' + this.trendMovie.poster_path,
         }
     },
 
     props: {
-        movie: Object,
         trendMovie: Object,
     },
 
@@ -28,7 +27,7 @@ export default {
 
     computed: {
         correctFlag() {
-            switch(this.languageFlag) {
+            switch (this.languageFlag) {
                 case "en":
                     return "gb";
                 case "ja":
@@ -49,7 +48,7 @@ export default {
         },
 
         correctImage() {
-            if(this.movieImage.slice(this.movieImage.length - 4) == 'null') {
+            if (this.movieImage.slice(this.movieImage.length - 4) == 'null') {
                 this.movieImage = 'https://t3.ftcdn.net/jpg/04/34/72/82/360_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg';
             } else {
                 return this.movieImage;
@@ -65,22 +64,19 @@ export default {
 
 
 <template>
-    
-    <div class="movie-card" v-if="this.store.loader == false">
-        <img :src="`${correctImage}`" alt="" >
-        <div class="movie-title">Titolo: <strong>{{ movie.title }}</strong></div>
-        <div class="movie-orig-title">Titolo originale: {{ movie.original_title }}</div>
-        <div class="movie-orig-lang">Lingua originale: <span :class="`fi fi-${correctFlag}`"></span></div>
-        <div class="movie-vote-avg">Voto medio: <i v-for="star in Math.ceil(movie.vote_average / 2)" class="fa-solid fa-star"></i><i v-for="star in 5 - Math.ceil(movie.vote_average / 2)" class="fa-regular fa-star"></i></div>
+
+    <div class="trend-movie" v-if="this.store.loader == true">
+            <img :src="`https://image.tmdb.org/t/p/w342/${trendMovie.poster_path}`" alt="">
+            <div class="movie-title">Titolo: <strong>{{ trendMovie.title }}</strong></div>
+            <div class="movie-orig-title">Titolo originale: {{ trendMovie.original_title }}</div>
+            <div class="movie-orig-lang">Lingua originale: <span :class="`fi fi-${correctFlag}`"></span></div>
+            <div class="movie-vote-avg">Voto medio: <i v-for="star in Math.ceil(trendMovie.vote_average / 2)" class="fa-solid fa-star"></i><i v-for="star in 5 - Math.ceil(trendMovie.vote_average / 2)" class="fa-regular fa-star"></i></div>
 
     </div>
-
-
 </template>
 
 <style lang="scss" scoped>
-
-.movie-card {
+.trend-movie {
     display: flex;
     flex-flow: column nowrap;
     gap: 5px;
@@ -96,6 +92,7 @@ export default {
         object-fit: contain;
         height: 100%;
     }
+
     .movie-title, .movie-orig-title, .movie-orig-lang, .movie-vote-avg {
         display: flex;
         align-items: center;
@@ -106,9 +103,4 @@ export default {
         border-top: 1px solid red;
     }
 }
-
-
-
-
-
 </style>

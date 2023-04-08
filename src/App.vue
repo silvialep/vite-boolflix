@@ -62,30 +62,28 @@ export default {
       }
     },
 
-    // trendingMovies() {
-    //   axios.get(this.store.APItrendingMovieCall).then((res) => {
-    //     this.store.trendingMovies = res.data.results;
-    //   });
+    trendingMovies() {
+      axios.get(this.store.APItrendingMovieCall).then((res) => {
+        this.store.trendingMovies = res.data.results;
+        console.log(this.store.trendingMovies);
+      });
 
-    // },
+    },
 
-    // trendingSeries() {
-    //   axios.get(this.store.APItrendingSeriesCall).then((res) => {
-    //     this.store.trendingSeries = res.data.results;
-    //   });
-    // },
+    trendingSeries() {
+      axios.get(this.store.APItrendingSeriesCall).then((res) => {
+        this.store.trendingSeries = res.data.results;
+        console.log(this.store.trendingSeries);
+      });
+    },
 
   },
 
-  // created() {
-  //   this.trendingMovies();
-  //   console.log(this.store.trendingMovies);
-  //   this.trendingSeries();
-  //   console.log(this.store.trendingSeries);
+  created() {
+    this.trendingMovies();
+    this.trendingSeries();
 
-  //   // this.trendingMovies();
-  //   // this.trendingSeries()
-  // },
+  },
 
   emits: [
     'user-search',

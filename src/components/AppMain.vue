@@ -2,6 +2,8 @@
 
 import MovieItem from "./MovieItem.vue";
 import SeriesItem from "./SeriesItem.vue";
+import TrendMovieItem from "./TrendMovieItem.vue";
+import TrendSeriesItem from "./TrendSeriesItem.vue";
 
 import { store } from "../store.js";
 import axios from "axios";
@@ -22,6 +24,8 @@ export default {
     components: {
         MovieItem,
         SeriesItem,
+        TrendMovieItem,
+        TrendSeriesItem,
     },
 
     methods: {
@@ -40,18 +44,19 @@ export default {
 <template>
     <div id="big-container">
         
-        <h2>Movies</h2>
+        <h2 v-if="this.store.loader == false">Movies</h2>
+        <h2 v-else>Trending Movies</h2>
         <div id="movie-container">
             <MovieItem :movie="movie" v-for="movie in this.store.movies"></MovieItem>
-            <!-- <MovieItem :trendMovie="trendMovie" v-for="trendMovie in this.store.trendingMovies"></MovieItem> -->
-
-            
+            <TrendMovieItem :trendMovie="trendMovie" v-for="trendMovie in this.store.trendingMovies"></TrendMovieItem>
         </div>
         
         
-        <h2>Series</h2>
+        <h2 v-if="this.store.loader == false">Series</h2>
+        <h2 v-else>Trending Series</h2>
         <div id="series-container">
             <SeriesItem :serie="serie" v-for="serie in this.store.series"></SeriesItem>
+            <TrendSeriesItem :trendSerie="trendSerie" v-for="trendSerie in this.store.trendingSeries"></TrendSeriesItem>
         </div>
 
     </div>
@@ -61,7 +66,7 @@ export default {
 
 #big-container {
     width: 1400px;
-    margin: auto;
+    margin: 100px auto;
     padding: 40px;
 
     h2 {

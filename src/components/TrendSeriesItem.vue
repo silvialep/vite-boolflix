@@ -5,18 +5,18 @@ import { store } from "../store.js";
 
 export default {
 
-    name: 'SeriesItem',
+    name: 'TrendSeriesItem',
 
     data() {
         return {
             store,
-            languageFlag: this.serie.original_language,
-            serieImage: 'https://image.tmdb.org/t/p/w342' + this.serie.poster_path,
+            languageFlag: this.trendSerie.original_language,
+            serieImage: 'https://image.tmdb.org/t/p/w342' + this.trendSerie.poster_path,
         }
     },
 
     props: {
-        serie: Object,
+        trendSerie: Object,
     },
 
     computed: {
@@ -58,18 +58,18 @@ export default {
 </script>
 
 <template>
-    <div class="serie-card" v-if="this.store.loader == false">
+    <div class="trend-serie" v-if="this.store.loader == true">
         <img :src="`${correctImage}`" alt="">
-        <div class="serie-title">Titolo: <strong>{{ serie.name }}</strong></div>
-        <div class="serie-orig-title">Titolo originale: {{ serie.original_name }}</div>
+        <div class="serie-title">Titolo: <strong>{{ trendSerie.name }}</strong></div>
+        <div class="serie-orig-title">Titolo originale: {{ trendSerie.original_name }}</div>
         <div class="serie-orig-lang">Lingua originale: <span :class="`fi fi-${correctFlag}`"></span></div>
-        <div class="serie-vote-avg">Voto medio: <i v-for="star in Math.ceil(serie.vote_average / 2)" class="fa-solid fa-star"></i><i v-for="star in 5 - Math.ceil(serie.vote_average / 2)" class="fa-regular fa-star"></i></div>
+        <div class="serie-vote-avg">Voto medio: <i v-for="star in Math.ceil(trendSerie.vote_average / 2)" class="fa-solid fa-star"></i><i v-for="star in 5 - Math.ceil(trendSerie.vote_average / 2)" class="fa-regular fa-star"></i></div>
 
     </div>
 </template>
 
 <style lang="scss" scoped>
-.serie-card {
+.trend-serie {
     display: flex;
     flex-flow: column nowrap;
     gap: 5px;
@@ -85,6 +85,7 @@ export default {
         object-fit: contain;
         height: 100%;
     }
+
     .serie-title, .serie-orig-title, .serie-orig-lang, .serie-vote-avg {
         display: flex;
         align-items: center;
@@ -102,6 +103,5 @@ export default {
         }
     }
 }
-
 
 </style>
