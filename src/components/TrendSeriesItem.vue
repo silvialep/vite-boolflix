@@ -36,6 +36,10 @@ export default {
                     return "ir";
                 case "he":
                     return "il";
+                case "ar":
+                    return "eg";
+                case "sv":
+                    return "se";
                 default:
                     return this.languageFlag;
             }
@@ -76,12 +80,11 @@ export default {
     min-width: 300px;
     max-width: 300px;
     height: 600px;
-    border: 1px solid red;
-    padding: 8px;
+    padding-bottom: 8px;
     font-size: 0.8rem;
 
     img {
-        flex-grow: 1;
+        // flex-grow: 1;
         object-fit: contain;
         height: 100%;
     }
@@ -91,17 +94,8 @@ export default {
         align-items: center;
         gap: 5px;
         width: 100%;
-        height: 8%;
-        border-top: 1px solid red;
     }
 
-    .serie-orig-lang {
-        img {
-            height: 50%;
-            object-fit: contain;
-            object-position: left;
-        }
-    }
 }
 
 </style>

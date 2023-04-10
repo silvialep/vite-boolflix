@@ -28,6 +28,9 @@ export default {
         TrendSeriesItem,
     },
 
+    emits: [
+    ],
+
     methods: {
         
         
@@ -66,11 +69,12 @@ export default {
 
 #big-container {
     width: 1400px;
-    margin: 100px auto;
-    padding: 40px;
+    margin: 80px auto;
+    padding: 20px;
 
     h2 {
         padding: 10px 0;
+        font-size: 2.5rem;
     }
 
     
@@ -91,6 +95,7 @@ export default {
     display: flex;
     flex-flow: row nowrap;
     gap: 10px;
+    height: auto;
     overflow-x: scroll;
 }
 </style>

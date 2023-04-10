@@ -36,6 +36,10 @@ export default {
                     return "ir";
                 case "he":
                     return "il";
+                case "ar":
+                    return "eg";
+                case "sv":
+                    return "se";
                 default:
                     return this.languageFlag;
             }
@@ -94,13 +98,6 @@ export default {
         border-top: 1px solid red;
     }
 
-    .serie-orig-lang {
-        img {
-            height: 50%;
-            object-fit: contain;
-            object-position: left;
-        }
-    }
 }
 
 

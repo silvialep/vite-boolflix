@@ -43,6 +43,10 @@ export default {
                     return "ir";
                 case "he":
                     return "il";
+                case "ar":
+                    return "eg";
+                case "sv":
+                    return "se";
                 default:
                     return this.languageFlag;
             }
